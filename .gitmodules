@@ -1,0 +1,6 @@
+[submodule "backend/MOCI_DdaSoop_File_BE"]
+	path = backend/MOCI_DdaSoop_File_BE
+	url = https://github.com/MOCI-ddasoop/MOCI_DdaSoop_File_BE.git
+[submodule "backend/MOCI_DdaSoop_BE"]
+	path = backend/MOCI_DdaSoop_BE
+	url = https://github.com/MOCI-ddasoop/MOCI_DdaSoop_BE.git
