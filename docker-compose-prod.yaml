@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: "moci-db"
+    env_file:
+        - /etc/environment
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "${PASSWORD_1}" # 비밀번호 설정할 경우
+      POSTGRES_DB: "ddasoop"
+      TZ: "Asia/Seoul"
+    volumes:
+      - ./postgres_data:/var/lib/postgres
+      # - ./postgres_setting.sh:/docker-entrypoint-initdb.d/init-db.sh # 데이터베이스 조회 유저랑 테이블 생성 유저를 분리할 때
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+  
+  redis:
+    image: redis:7-alpine
+    container_name: "moci-redis"
+    ports:
+      - "6379:6379"
+    env_file:
+      - /etc/environment
+    command: ["redis-server", "--appendonly", "yes"]
+#    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"] # 비밀번호 설정할 경우
+    volumes:
+      - ./redis-data:/data
+    restart: unless-stopped
+  
